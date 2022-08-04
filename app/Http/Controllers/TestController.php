@@ -12,25 +12,13 @@ class TestController extends Controller
 {
     function request()
     {
-        // $transaction = Transaction::create([
-        //     'user_id' => 1,
-        //     'checkout_id' => '19199999',
-        //     'status' => 'Active',
-        //     'amount' => 92.00,
-        //     'currency' => 'SAR',
-        //     'data' => 'xyz',
-        //     'trackable_data' => 'ko',
-        //     'brand' => "lala",
-
-        // ]);
-
         $id = Str::random('64');
         $url = "https://eu-test.oppwa.com/v1/checkouts";
-        $data = "entityId=8a8294174b7ecb28014b9699220015ca" .
-            "&amount=92" .
-            "&currency=EUR" .
+        $data = "entityId=8ac7a4c7821355f801821558fc2c1b00" .
+            "&amount=59" .
+            "&currency=SAR" .
             "&paymentType=DB" .
-            "&testMode=EXTERNAL" .
+            "&testMode=INTERNAL" .
             "&merchantTransactionId=" . $id .
             "&customer.email=moeezahmed448@gmail.com" .
             "&billing.street1=chaghiroadquetta" .
@@ -44,7 +32,7 @@ class TestController extends Controller
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization:Bearer OGE4Mjk0MTc0YjdlY2IyODAxNGI5Njk5MjIwMDE1Y2N8c3k2S0pzVDg='
+            'Authorization:Bearer OGFjN2E0Yzc4MjEzNTVmODAxODIxNTU4OTJiMTFhZmJ8ZWJaV3NacDNFRw=='
         ));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
