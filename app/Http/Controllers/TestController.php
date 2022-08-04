@@ -6,31 +6,18 @@ use Devinweb\LaravelHyperpay\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class TestController extends Controller
 {
     function request()
     {
-        // $transaction = Transaction::create([
-        //     'user_id' => 1,
-        //     'checkout_id' => '19199999',
-        //     'status' => 'Active',
-        //     'amount' => 92.00,
-        //     'currency' => 'SAR',
-        //     'data' => 'xyz',
-        //     'trackable_data' => 'ko',
-        //     'brand' => "lala",
-
-        // ]);
-
         $id = Str::random('64');
         $url = "https://eu-test.oppwa.com/v1/checkouts";
-        $data = "entityId=8a8294174b7ecb28014b9699220015ca" .
-            "&amount=92" .
-            "&currency=EUR" .
+        $data = "entityId=8ac7a4c7821355f801821558fc2c1b00" .
+            "&amount=120" .
+            "&currency=SAR" .
             "&paymentType=DB" .
-            "&testMode=EXTERNAL" .
+            "&testMode=INTERNAL" .
             "&merchantTransactionId=" . $id .
             "&customer.email=moeezahmed448@gmail.com" .
             "&billing.street1=chaghiroadquetta" .
@@ -44,7 +31,7 @@ class TestController extends Controller
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization:Bearer OGE4Mjk0MTc0YjdlY2IyODAxNGI5Njk5MjIwMDE1Y2N8c3k2S0pzVDg='
+            'Authorization:Bearer OGFjN2E0Yzc4MjEzNTVmODAxODIxNTU4OTJiMTFhZmJ8ZWJaV3NacDNFRw=='
         ));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -56,9 +43,49 @@ class TestController extends Controller
         }
         curl_close($ch);
         $data = json_decode($responseData);
-        // return $data;
+        // return $data->id;
         return view('dashboard', compact('data'));
     }
+
+
+
+
+
+    // public function request()
+    // {
+    //     $url = "https://eu-test.oppwa.com/v1/payments";
+    //     $data = "entityId=8ac7a4c7821355f801821558fc2c1b00" .
+    //         "&amount=92.00" .
+    //         "&currency=SAR" .
+    //         "&paymentBrand=VISA" .
+    //         "&paymentType=DB" .
+    //         "&testMode=INTERNAL" .
+    //         "&card.number=4111111111111111" .
+    //         "&card.holder=Jane Jones" .
+    //         "&card.expiryMonth=12" .
+    //         "&card.expiryYear=2022" .
+    //         "&card.cvv=123" .
+    //         "&shopperResultUrl=https://wordpresshyperpay.docs.oppwa.com/tutorials/server-to-server";
+
+    //     $ch = curl_init();
+    //     curl_setopt($ch, CURLOPT_URL, $url);
+    //     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    //         'Authorization:Bearer OGFjN2E0Yzc4MjEzNTVmODAxODIxNTU4OTJiMTFhZmJ8ZWJaV3NacDNFRw=='
+    //     ));
+    //     curl_setopt($ch, CURLOPT_POST, 1);
+    //     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    //     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this should be set to true in production
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //     $responseData = curl_exec($ch);
+    //     if (curl_errno($ch)) {
+    //         return curl_error($ch);
+    //     }
+    //     curl_close($ch);
+    //     $data = json_decode($responseData);
+    //     return $data;
+    //     return redirect()->route('welcome', [$data->id]);
+    //     return $responseData;
+    // }
 
     function xyz()
     {

@@ -6,7 +6,6 @@ use Devinweb\LaravelHyperpay\Facades\LaravelHyperpay;
 use App\Billing\HyperPayBilling;
 use App\Models\User;
 use Illuminate\Support\Str;
-
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -14,12 +13,12 @@ class PaymentController extends Controller
     public function welcome(Request $request)
     {
         $url = "https://eu-test.oppwa.com/v1/checkouts/" . $request->id . "/payment";
-        $url .= "?entityId=8a8294174b7ecb28014b9699220015ca";
+        $url .= "?entityId=8ac7a4c7821355f801821558fc2c1b00";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization:Bearer OGE4Mjk0MTc0YjdlY2IyODAxNGI5Njk5MjIwMDE1Y2N8c3k2S0pzVDg='
+            'Authorization:Bearer OGFjN2E0Yzc4MjEzNTVmODAxODIxNTU4OTJiMTFhZmJ8ZWJaV3NacDNFRw=='
         ));
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this should be set to true in production
@@ -34,6 +33,28 @@ class PaymentController extends Controller
         return $data;
         // return view('welcome');
     }
+
+
+    // public function welcome($id)
+    // {
+    //     $url = "https://eu-test.oppwa.com/v1/payments/" . $id;
+    //     $url .= "?entityId=8ac7a4c7821355f801821558fc2c1b00";
+
+    //     $ch = curl_init();
+    //     curl_setopt($ch, CURLOPT_URL, $url);
+    //     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    //         'Authorization:Bearer OGFjN2E0Yzc4MjEzNTVmODAxODIxNTU4OTJiMTFhZmJ8ZWJaV3NacDNFRw=='
+    //     ));
+    //     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+    //     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this should be set to true in production
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //     $responseData = curl_exec($ch);
+    //     if (curl_errno($ch)) {
+    //         return curl_error($ch);
+    //     }
+    //     curl_close($ch);
+    //     return $responseData;
+    // }
 
 
     public function prepareCheckout(Request $request)

@@ -17,7 +17,6 @@
 
 <body>
     <form action="{{ route('welcome') }}" class="paymentWidgets" data-brands="VISA MASTER MADA"></form>
-
 </body>
 <script>
     var wpwlOptions = {
